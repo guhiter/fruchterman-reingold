@@ -1,0 +1,6 @@
+#X, Y, Ac, Td
+ANCHO = 1366
+ALTO = 768
+RADIO = 8
+FACTOR_TEMP = 0.95
+TEMP = 100
