@@ -6,17 +6,14 @@ from argparse import ArgumentParser
 PATH = os.path.abspath(os.path.dirname(__file__))
 PATH_INPUT = PATH + "/grafos/"
 
-
-BACKGROUND_COLOR = 0, 0, 0
-CONSTANT = 0.3
-
 def arguments():
 	parser = ArgumentParser()
 
 	parser.add_argument('-d', '--debug', action='store_true', help='Modo debug, (muestra informacion en pantalla', default=False)
+	parser.add_argument('-o', '--output', action='store_true', help='Guarda el grafo como se ve en la ventana como una imagen, cuando se apreta la tecla Esc', default=False)
 
 	group = parser.add_mutually_exclusive_group()
-	group.add_argument('-f', '--file', type=open, help='Nombre del archivo bajo src/grafos/ a importar')
+	group.add_argument('-f', '--file', help='Nombre del archivo bajo src/grafos/ a importar')
 	group.add_argument('-k', '--complete', type=int, metavar='K', help='Genera un grafo completo de K vertices')
 	group.add_argument('-m', '--manta', type=int, metavar='M', help='Genera una manta de K vertices')
 	group.add_argument('-b', '--bipartite', nargs=2, type=int, metavar=('A','B'), help="Genera un grafo bipartito completo con una componente de A vertices y la otra de B vertices")
@@ -47,12 +44,12 @@ def main():
 
 	G = Grafos.crearGrafo(G, 400,400)
 	t = config.TEMP
-	k = CONSTANT * math.sqrt((config.ANCHO*config.ALTO)/len(G[0]))
+	k = config.CONSTANT * math.sqrt((config.ANCHO*config.ALTO)/len(G[0]))
 	key_down = False
 	key_up = False
 	
 	while True:
-		screen.fill((255,255,255))
+		screen.fill((config.BACKGROUND_COLOR))
 		Dibujar.dibujarGrafo(screen,G)
 		if args.debug:
 			Dibujar.dibujarTexto(screen, "k: " + str(k), 10, 7)
@@ -69,13 +66,14 @@ def main():
 
 			elif event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
+					pygame.image.save(screen, "output.png")
 					sys.exit()
 				if event.key == pygame.K_UP:
 					key_up = True
-					t = t * 1.2
+					t = t * config.TEMPERATURE_INCREASE_ON_KEYDOWN
 				if event.key == pygame.K_DOWN:
 					key_down = True
-					t = t * 1.2
+					t = t * config.TEMPERATURE_INCREASE_ON_KEYDOWN
 
 
 			elif event.type == pygame.KEYUP:
@@ -86,11 +84,11 @@ def main():
 
 		if key_up:
 			k += 1
-			t = t * 1.005
+			t = t * config.TEMPERATURE_INCREASE_ON_KEYHOLD
 
 		if key_down:
 			k = max(1, k-1)
-			t = t * 1.005
+			t = t * config.TEMPERATURE_INCREASE_ON_KEYHOLD
 
 
 if __name__ == "__main__":
