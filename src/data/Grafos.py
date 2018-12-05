@@ -41,6 +41,24 @@ def crearManta(n):
 			E.append([v,str(int(v)+n)])
 	return [V,E]
 
+def crearCompleto(n):
+	V = [str(i) for i in range(n)]
+	E = []
+	for i in range(n):
+		for j in range(i,n):
+			E.append([str(i),str(j)])
+	return [V,E]
+
+def crearBipartito(a,b):
+	V = [str(i) for i in range(1,a+b+1)]
+	E = []
+	for i in range(1, a+1):
+		for j in range(a+1,a+b+1):
+			E.append([str(i),str(j)])
+	print E
+	return [V,E]
+
+
 def fa(x,k):
 	return (x**2)/k
 
