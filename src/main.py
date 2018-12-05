@@ -72,10 +72,10 @@ def main():
 					sys.exit()
 				if event.key == pygame.K_UP:
 					key_up = True
-					#t += 50
+					t = t * 1.2
 				if event.key == pygame.K_DOWN:
 					key_down = True
-					#t += 50
+					t = t * 1.2
 
 
 			elif event.type == pygame.KEYUP:
@@ -86,11 +86,11 @@ def main():
 
 		if key_up:
 			k += 1
-			#t += 10
+			t = t * 1.005
 
 		if key_down:
 			k = max(1, k-1)
-			#t += 10
+			t = t * 1.005
 
 
 if __name__ == "__main__":
