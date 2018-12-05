@@ -26,12 +26,13 @@ Para abrir grafos por archivo con su respectiva opcion sobre la linea de comando
 ### Linea de comandos
 
 ```sh
-usage: python main.py [-h] [-d] [-f FILE | -k K | -b A B]
+usage: python main.py [-h] [-d] [-f FILE | -k K | -m M |-b A B]
 
 optional arguments:
   -h, --help               show this help message and exit
-  -d, --debug              modo debug
-  -f FILE, --file FILE     carga el grafo desde un archivo
-  -k K, --complete K       genera un grafo completo con K vertices
-  -b A B, --bipartite A B  genera un grafo bipartito completo con A y B vertices cada componente
+  -d, --debug              Modo debug, (muestra informacion en pantalla
+  -f FILE, --file FILE     Nombre del archivo bajo src/grafos/ a importar
+  -k K, --complete K       Genera un grafo completo de K vertices
+  -m M, --manta M 		   Genera una manta de K vertices
+  -b A B, --bipartite A B  Genera un grafo bipartito completo con una componente de A vertices y la otra de B vertices
 ```
