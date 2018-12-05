@@ -34,6 +34,6 @@ optional arguments:
   -o, --output             Guarda el grafo como se ve en la ventana como una imagen, cuando se apreta la tecla Esc
   -f FILE, --file FILE     Nombre del archivo bajo src/grafos/ a importar
   -k K, --complete K       Genera un grafo completo de K vertices
-  -m M, --manta M 		   Genera una manta de K vertices
+  -m M, --manta M          Genera una manta de K vertices
   -b A B, --bipartite A B  Genera un grafo bipartito completo con una componente de A vertices y la otra de B vertices
 ```
