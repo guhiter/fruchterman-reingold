@@ -4,6 +4,7 @@ from data import Grafos, Dibujar, config
 from argparse import ArgumentParser
 
 PATH = os.path.abspath(os.path.dirname(__file__))
+PATH_INPUT = PATH + "/grafos/"
 
 
 BACKGROUND_COLOR = 0, 0, 0
@@ -14,7 +15,7 @@ def main():
 	pygame.init()
 	screen = pygame.display.set_mode(SCREEN_SIZE)
 	pygame.display.set_caption("Fruchterman-Reingold")
-	#G = Grafos.leerGrafo(PATH + "/input")
+	#G = Grafos.leerGrafo(PATH_INPUT + "input")
 	G = Grafos.crearManta(15)
 	G = Grafos.crearGrafo(G, 400,400)
 	t = config.TEMP
