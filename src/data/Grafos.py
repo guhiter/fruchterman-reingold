@@ -61,27 +61,28 @@ def iteracionFruchterman(G,k,t,L,W):
 					mod = 1
 				v.desp = Vector.suma(v.desp, Vector.mult((1/mod)*fr(mod, k), dif))
 			
-			dif = Vector.resta([config.ANCHO/2, config.ALTO/2], v.pos)
-			mod = Vector.mod(dif)
-			if mod == 0:
-				mod = 1
-			v.desp = Vector.suma(v.desp, Vector.mult((1/mod)*fa(mod,k), dif))
+		dif = Vector.resta([config.ANCHO/2, config.ALTO/2], v.pos)
+		mod = Vector.mod(dif)
+		if mod == 0:
+			mod = 1
+		v.desp = Vector.suma(v.desp, Vector.mult((1/mod)*fa(mod,k), dif))
 
-		for e in E:
-			dif = Vector.resta(e.a.pos, e.b.pos)
-			mod = Vector.mod(dif)
-			if mod == 0:
-				mod = 1
-			e.a.desp = Vector.resta(e.a.desp, Vector.mult((1/mod)*fa(mod,k), dif))
-			e.b.desp = Vector.suma(e.b.desp, Vector.mult((1/mod)*fa(mod,k), dif))
+	for e in E:
+		dif = Vector.resta(e.a.pos, e.b.pos)
+		mod = Vector.mod(dif)
+		if mod == 0:
+			mod = 1
+		e.a.desp = Vector.resta(e.a.desp, Vector.mult((1/mod)*fa(mod,k), dif))
+		e.b.desp = Vector.suma(e.b.desp, Vector.mult((1/mod)*fa(mod,k), dif))
 
-		for v in V:
-			modulo = Vector.mod(v.desp)
-			if modulo > 8:
-				modMax = min(modulo, t)
-				v.pos = Vector.suma(v.pos, Vector.mult((modMax/modulo), v.desp))
+	for v in V:
+		modulo = Vector.mod(v.desp)
+		if modulo > 8:
+			modMax = min(modulo, t)
+			v.pos = Vector.suma(v.pos, Vector.mult((modMax/modulo), v.desp))
 
-				v.pos[0] = int(round(min(W,max(0,v.pos[0]))))
-				v.pos[1] = int(round(min(L,max(0,v.pos[1]))))
+			v.pos[0] = int(round(min(W,max(0,v.pos[0]))))
+			v.pos[1] = int(round(min(L,max(0,v.pos[1]))))
 
 	return t * config.FACTOR_TEMP
+	#return t
