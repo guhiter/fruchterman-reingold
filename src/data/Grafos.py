@@ -1,4 +1,5 @@
 import Clases, random, Vector, config
+from math import exp
 
 def leerGrafo(path):
 	fObj = open(path, "r")
@@ -24,7 +25,7 @@ def crearGrafo(G, deltaX, deltaY):
 	for v in G[0]:
 		D[v] = i
 		i += 1
-		grafo[0].append(Clases.Nodo(v, (0,230,0), config.RADIO, random.randint(120, deltaX), random.randint(120, deltaY)))
+		grafo[0].append(Clases.Nodo(v, (0,230,0), config.RADIO, random.randint(0, deltaX)+config.ANCHO/2, random.randint(0, deltaY)+config.ALTO/2))
 
 	for e in G[1]:
 		grafo[1].append(Clases.Arista((0,0,0), grafo[0][D[e[0]]], grafo[0][D[e[1]]], 2))
@@ -71,6 +72,8 @@ def iteracionFruchterman(G,k,t,L,W):
 
 	for v in V:
 		v.desp = [0,0]
+
+	for v in V:
 		for u in V:
 			if (not (u.nombre == v.nombre)):
 				dif = Vector.resta(u.pos, v.pos)
@@ -88,7 +91,7 @@ def iteracionFruchterman(G,k,t,L,W):
 	for e in E:
 		dif = Vector.resta(e.a.pos, e.b.pos)
 		mod = Vector.mod(dif)
-		if mod == 0:
+		if mod < 1:
 			mod = 1
 		e.a.desp = Vector.resta(e.a.desp, Vector.mult((1/mod)*fa(mod,k), dif))
 		e.b.desp = Vector.suma(e.b.desp, Vector.mult((1/mod)*fa(mod,k), dif))
@@ -103,4 +106,3 @@ def iteracionFruchterman(G,k,t,L,W):
 			v.pos[1] = int(round(min(L,max(0,v.pos[1]))))
 
 	return t * config.FACTOR_TEMP
-	#return t

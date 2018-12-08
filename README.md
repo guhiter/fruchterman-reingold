@@ -32,6 +32,7 @@ optional arguments:
   -h, --help               show this help message and exit
   -d, --debug              Modo debug, (muestra informacion en pantalla)
   -o, --output             Guarda el grafo como se ve en la ventana como una imagen, cuando se apreta la tecla Esc
+  -i I, --iter I           Limita la cantidad de iteraciones a realizar del algoritmo 
   -f FILE, --file FILE     Nombre del archivo bajo src/grafos/ a importar
   -k K, --complete K       Genera un grafo completo de K vertices
   -m M, --manta M          Genera una manta de K vertices
