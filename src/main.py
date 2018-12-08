@@ -50,7 +50,12 @@ def main():
 		return	
 
 	G = Grafos.crearGrafo(G, 300,300)
-	t = config.TEMP
+	t = len(G[0]) / 6
+	if t < config.MIN_TEMP:
+		t = config.MIN_TEMP
+	elif t > config.MAX_TEMP:
+		t = config.MAX_TEMP
+		
 	#t = (config.ANCHO*config.ALTO)/10
 	k = int(config.CONSTANT * math.sqrt((config.ANCHO*config.ALTO)/len(G[0])))
 	#k = math.sqrt((config.ANCHO*config.ALTO)/len(G[0]))
@@ -79,11 +84,10 @@ def main():
 			t = Grafos.iteracionFruchterman(G,k,t,config.ALTO,config.ANCHO)
 			iterN -= 1
 
-		if t < 1:
-			t = 1
+		if t < 0.3:
+			t = 0.3
 
 		pygame.display.flip()
-		#time.sleep(0.01)
 		time.sleep(config.SLEEP_TIME)
 
 		for event in pygame.event.get():

@@ -103,7 +103,7 @@ def iteracionFruchterman(G,k,t,L,W):
 	for v in V:
 		modulo = Vector.mod(v.desp)
 		if modulo > 8:
-			modMax = min(modulo, 1)
+			modMax = min(modulo, t)
 			v.pos = Vector.suma(v.pos, Vector.mult((modMax/modulo), v.desp))
 
 			v.pos[0] = int(round(min(W,max(0,v.pos[0]))))
