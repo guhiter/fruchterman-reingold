@@ -52,7 +52,7 @@ def main():
 	G = Grafos.crearGrafo(G, 300,300)
 	t = config.TEMP
 	#t = (config.ANCHO*config.ALTO)/10
-	k = config.CONSTANT * math.sqrt((config.ANCHO*config.ALTO)/len(G[0]))
+	k = int(config.CONSTANT * math.sqrt((config.ANCHO*config.ALTO)/len(G[0])))
 	#k = math.sqrt((config.ANCHO*config.ALTO)/len(G[0]))
 
 	iterN = args.iter
@@ -72,17 +72,19 @@ def main():
 			if not infinite:
 				Dibujar.dibujarTexto(screen, "Iteracion: " + str(iterN), 10, 29)
 			for v in G[0]:
-				print("{0} desplazamiento: {1}".format(v.nombre, str(v.desp)))
+				print("{0}\t desplazamiento:\t {1}".format(v.nombre, str(v.desp)))
+			print ("-----------------------------------------------")
 
 		if infinite or iterN > 0:
 			t = Grafos.iteracionFruchterman(G,k,t,config.ALTO,config.ANCHO)
 			iterN -= 1
+
 		if t < 1:
 			t = 1
 
 		pygame.display.flip()
 		#time.sleep(0.01)
-		time.sleep(0.005)
+		time.sleep(config.SLEEP_TIME)
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:

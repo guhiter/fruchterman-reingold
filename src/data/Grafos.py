@@ -72,33 +72,38 @@ def iteracionFruchterman(G,k,t,L,W):
 	for v in V:
 		v.desp = [0,0]
 
-	for v in V:
-		for u in V:
+	for i, v in enumerate(V):
+		#*Calculamos Repulsiones
+		for u in V[:i]+V[i+1:]:
 			if (not (u.nombre == v.nombre)):
 				dif = Vector.resta(u.pos, v.pos)
 				mod = Vector.mod(dif)
 				if mod == 0:
 					mod = 1
 				v.desp = Vector.suma(v.desp, Vector.mult((1/mod)*fr(mod, k), dif))
-			
+				u.desp = Vector.suma(u.desp, Vector.mult((-1/mod)*fr(mod, k), dif))
+		
+		#*Calculamos atraccion gravitatoria	
 		dif = Vector.resta([config.ANCHO/2, config.ALTO/2], v.pos)
 		mod = Vector.mod(dif)
 		if mod == 0:
 			mod = 1
 		v.desp = Vector.suma(v.desp, Vector.mult((1/mod)*fa(mod,k), dif))
-
+	
+	#*Calculamos Atracciones
 	for e in E:
 		dif = Vector.resta(e.a.pos, e.b.pos)
 		mod = Vector.mod(dif)
-		if mod < 1:
+		if mod == 0:
 			mod = 1
 		e.a.desp = Vector.resta(e.a.desp, Vector.mult((1/mod)*fa(mod,k), dif))
 		e.b.desp = Vector.suma(e.b.desp, Vector.mult((1/mod)*fa(mod,k), dif))
 
+	#*
 	for v in V:
 		modulo = Vector.mod(v.desp)
 		if modulo > 8:
-			modMax = min(modulo, t)
+			modMax = min(modulo, 1)
 			v.pos = Vector.suma(v.pos, Vector.mult((modMax/modulo), v.desp))
 
 			v.pos[0] = int(round(min(W,max(0,v.pos[0]))))
