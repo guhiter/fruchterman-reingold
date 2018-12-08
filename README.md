@@ -30,7 +30,7 @@ usage: python main.py [-h] [-d] [-f FILE | -k K | -m M |-b A B]
 
 optional arguments:
   -h, --help               show this help message and exit
-  -d, --debug              Modo debug, (muestra informacion en pantalla)
+  -d, --debug              Modo debug, (muestra informacion en pantalla, y los desplazamientos de los nodos en la terminal)
   -o, --output             Guarda el grafo como se ve en la ventana como una imagen, cuando se apreta la tecla Esc
   -i I, --iter I           Limita la cantidad de iteraciones a realizar del algoritmo 
   -f FILE, --file FILE     Nombre del archivo bajo src/grafos/ a importar
