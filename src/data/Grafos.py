@@ -1,5 +1,4 @@
 import Clases, random, Vector, config
-from math import exp
 
 def leerGrafo(path):
 	fObj = open(path, "r")
