@@ -41,6 +41,6 @@ optional arguments:
 
 ### Comandos en ventana
 Estando el programa corriendo, es posible modificar ciertos valores con las flechas del teclado
--Flecha arriba: aumentamos el k
--Flecha abajo: decrementamos el k
--Flecha derecha: aumentamos el numero de iteraciones(solo valido si estamos usando la opcion --iter)
+- Flecha arriba: aumentamos el k
+- Flecha abajo: decrementamos el k
+- Flecha derecha: aumentamos el numero de iteraciones(solo valido si estamos usando la opcion --iter)
