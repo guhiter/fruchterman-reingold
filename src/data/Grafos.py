@@ -68,7 +68,6 @@ def fr(x,k):
 def iteracionFruchterman(G,k,t,L,W):
 	V = G[0]
 	E = G[1]
-	#dist = {}
 
 	for v in V:
 		v.desp = [0,0]

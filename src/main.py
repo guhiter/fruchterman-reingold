@@ -56,9 +56,7 @@ def main():
 	elif t > config.MAX_TEMP:
 		t = config.MAX_TEMP
 		
-	#t = (config.ANCHO*config.ALTO)/10
 	k = int(config.CONSTANT * math.sqrt((config.ANCHO*config.ALTO)/len(G[0])))
-	#k = math.sqrt((config.ANCHO*config.ALTO)/len(G[0]))
 
 	iterN = args.iter
 	infinite = False

@@ -1,7 +1,4 @@
 class Nodo:
-	#nombre = ""
-	#color = (0,200,0)
-	#radio = 0
 
 	def __init__(self,nombre,color,r,x,y):
 		self.nombre = nombre
