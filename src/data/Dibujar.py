@@ -2,14 +2,14 @@ import pygame, Clases
 from pygame import gfxdraw
 
 def dibujarNodo(screen, nodo):
-	pygame.draw.circle(screen, nodo.color, (nodo.pos[0], nodo.pos[1]), nodo.radio)
+	pygame.draw.circle(screen, nodo.color, (int(round(nodo.pos[0])), int(round(nodo.pos[1]))), nodo.radio)
 
 def dibujarArista(screen, arista):
-	pygame.gfxdraw.line(screen, arista.a.pos[0], arista.a.pos[1], arista.b.pos[0], arista.b.pos[1], arista.color)
+	pygame.gfxdraw.line(screen, int(round(arista.a.pos[0])), int(round(arista.a.pos[1])), int(round(arista.b.pos[0])), int(round(arista.b.pos[1])), arista.color)
 
 def dibujarNombre(screen, nodo):
 	fuente = pygame.font.SysFont('comicsansms', 20)
-	screen.blit(fuente.render(nodo.nombre, True, (155,155,0)), (nodo.pos[0]+(nodo.radio/2), nodo.pos[1]+(nodo.radio/2)))
+	screen.blit(fuente.render(nodo.nombre, True, (155,155,0)), (int(round(nodo.pos[0]+(nodo.radio/2))), int(round(nodo.pos[1]+(nodo.radio/2)))))
 
 def dibujarTexto(screen, text, x, y):
 	fuente = pygame.font.SysFont('comicsansms', 20)

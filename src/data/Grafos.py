@@ -60,14 +60,15 @@ def crearBipartito(a,b):
 
 
 def fa(x,k):
-	return (x**2)/k
+	return (x)/k
 
 def fr(x,k):
-	return -(k**2)/x
+	return (k)/x
 
 def iteracionFruchterman(G,k,t,L,W):
 	V = G[0]
 	E = G[1]
+	#dist = {}
 
 	for v in V:
 		v.desp = [0,0]
@@ -75,38 +76,35 @@ def iteracionFruchterman(G,k,t,L,W):
 	for i, v in enumerate(V):
 		#*Calculamos Repulsiones
 		for u in V[:i]+V[i+1:]:
-			if (not (u.nombre == v.nombre)):
-				dif = Vector.resta(u.pos, v.pos)
-				mod = Vector.mod(dif)
-				if mod == 0:
-					mod = 1
-				v.desp = Vector.suma(v.desp, Vector.mult((1/mod)*fr(mod, k), dif))
-				u.desp = Vector.suma(u.desp, Vector.mult((-1/mod)*fr(mod, k), dif))
-		
+			dif = Vector.resta(u.pos, v.pos)
+			mod = Vector.mod(dif)
+			if mod < 2E-23:
+				mod = 2E-23
+			v.desp = Vector.resta(v.desp, Vector.mult(fr(mod, k), Vector.mult(1/mod,dif)))
+			u.desp = Vector.suma(u.desp, Vector.mult(fr(mod, k), Vector.mult(1/mod,dif)))
+	
 		#*Calculamos atraccion gravitatoria	
 		dif = Vector.resta([config.ANCHO/2, config.ALTO/2], v.pos)
 		mod = Vector.mod(dif)
-		if mod == 0:
-			mod = 1
-		v.desp = Vector.suma(v.desp, Vector.mult((1/mod)*fa(mod,k), dif))
+		if mod < 2E-23:
+			mod = 2E-23
+		v.desp = Vector.suma(v.desp, Vector.mult(fa(mod,k), Vector.mult(1/mod,dif)))
 	
 	#*Calculamos Atracciones
 	for e in E:
 		dif = Vector.resta(e.a.pos, e.b.pos)
 		mod = Vector.mod(dif)
-		if mod == 0:
-			mod = 1
-		e.a.desp = Vector.resta(e.a.desp, Vector.mult((1/mod)*fa(mod,k), dif))
-		e.b.desp = Vector.suma(e.b.desp, Vector.mult((1/mod)*fa(mod,k), dif))
+		if mod < 2E-23:
+			mod = 2E-23
+		e.a.desp = Vector.resta(e.a.desp, Vector.mult(fa(mod,k), Vector.mult(1/mod,dif)))
+		e.b.desp = Vector.suma(e.b.desp, Vector.mult(fa(mod,k), Vector.mult(1/mod,dif)))
 
 	#*
 	for v in V:
 		modulo = Vector.mod(v.desp)
-		if modulo > 8:
-			modMax = min(modulo, t)
-			v.pos = Vector.suma(v.pos, Vector.mult((modMax/modulo), v.desp))
+		v.pos = Vector.suma(v.pos, v.desp)
 
-			v.pos[0] = int(round(min(W,max(0,v.pos[0]))))
-			v.pos[1] = int(round(min(L,max(0,v.pos[1]))))
+		v.pos[0] = min(W,max(0,v.pos[0]))
+		v.pos[1] = min(L,max(0,v.pos[1]))
 
 	return t * config.FACTOR_TEMP

@@ -50,7 +50,7 @@ def main():
 		return	
 
 	G = Grafos.crearGrafo(G, 300,300)
-	t = len(G[0]) / 6
+	t = len(G[0]) / 12
 	if t < config.MIN_TEMP:
 		t = config.MIN_TEMP
 	elif t > config.MAX_TEMP:
@@ -80,12 +80,12 @@ def main():
 				print("{0}\t desplazamiento:\t {1}".format(v.nombre, str(v.desp)))
 			print ("-----------------------------------------------")
 
-		if infinite or iterN > 0:
+		if (infinite or iterN > 0) and t > config.CAP_CALCULATION:
 			t = Grafos.iteracionFruchterman(G,k,t,config.ALTO,config.ANCHO)
 			iterN -= 1
 
-		if t < 0.3:
-			t = 0.3
+		if t < config.CAP_CALCULATION:
+			t = config.CAP_CALCULATION
 
 		pygame.display.flip()
 		time.sleep(config.SLEEP_TIME)
