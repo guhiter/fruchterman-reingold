@@ -65,6 +65,7 @@ def main():
 
 	key_down = False
 	key_up = False
+	key_right = False
 	
 	while True:
 		screen.fill((config.BACKGROUND_COLOR))
@@ -74,11 +75,13 @@ def main():
 			Dibujar.dibujarTexto(screen, "t: " + str(t), 10, 18)
 			if not infinite:
 				Dibujar.dibujarTexto(screen, "Iteracion: " + str(iterN), 10, 29)
-			for v in G[0]:
-				print("{0}\t desplazamiento:\t {1}".format(v.nombre, str(v.desp)))
-			print ("-----------------------------------------------")
+			
 
 		if (infinite or iterN > 0) and t > config.CAP_CALCULATION:
+			if args.debug:
+				for v in G[0]:
+					print("Nodo {0}\t desplazamiento: {1}".format(v.nombre, str(v.desp)))
+				print ("-----------------------------------------------")
 			t = Grafos.iteracionFruchterman(G,k,t,config.ALTO,config.ANCHO)
 			iterN -= 1
 
@@ -102,6 +105,10 @@ def main():
 				if event.key == pygame.K_DOWN:
 					key_down = True
 					t = t * config.TEMPERATURE_INCREASE_ON_KEYDOWN
+				if event.key == pygame.K_RIGHT and not infinite:
+					key_right = True
+					iterN += 1
+
 
 
 			elif event.type == pygame.KEYUP:
@@ -109,6 +116,8 @@ def main():
 					key_up = False
 				if event.key == pygame.K_DOWN:
 					key_down = False
+				if event.key == pygame.K_RIGHT:
+					key_right = False
 
 		if key_up:
 			k += 1
@@ -117,6 +126,9 @@ def main():
 		if key_down:
 			k = max(1, k-1)
 			t = t * config.TEMPERATURE_INCREASE_ON_KEYHOLD
+
+		if key_right:
+			iterN += 1
 
 
 if __name__ == "__main__":

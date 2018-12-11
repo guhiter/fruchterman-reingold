@@ -38,3 +38,9 @@ optional arguments:
   -m M, --manta M          Genera una manta de K vertices
   -b A B, --bipartite A B  Genera un grafo bipartito completo con una componente de A vertices y la otra de B vertices
 ```
+
+### Comandos en ventana
+Estando el programa corriendo, es posible modificar ciertos valores con las flechas del teclado
+-Flecha arriba: aumentamos el k
+-Flecha abajo: decrementamos el k
+-Flecha derecha: aumentamos el numero de iteraciones(solo valido si estamos usando la opcion --iter)
